@@ -78,7 +78,9 @@ if(!post){
     res.status(201).json(post)
 }
 })
-
+.catch(err=>{
+    res.status(500).json({ error: "The post information could not be modified."})
+})
 }
  })
 
