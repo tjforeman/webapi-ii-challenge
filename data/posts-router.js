@@ -63,4 +63,23 @@ router.get('/:id', (req,res)=>{
     })
  })
 
+ router.put('/:id',(req,res) =>{
+const updatedPost=req.body
+console.log('req body:', updatedPost)
+if (!updatedPost.title || !updatedPost.contents){
+    res.status(400).json({message:"Please provide title and contents for the user."})
+}else{
+Db
+.update(req.params.id,updatedPost)
+.then(post=>{
+if(!post){
+    res.status(404).json({message:"The user with the specified ID does not exist."})
+}else{
+    res.status(201).json(post)
+}
+})
+
+}
+ })
+
 module.exports=router;
